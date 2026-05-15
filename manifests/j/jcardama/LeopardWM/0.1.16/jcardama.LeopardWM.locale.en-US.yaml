@@ -1,0 +1,56 @@
+# Created with WinGet Releaser using komac v2.16.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
+
+PackageIdentifier: jcardama.LeopardWM
+PackageVersion: 0.1.16
+PackageLocale: en-US
+Publisher: jcardama
+PublisherUrl: https://github.com/jcardama
+PublisherSupportUrl: https://github.com/jcardama/LeopardWM/issues
+Author: jcardama
+PackageName: LeopardWM
+PackageUrl: https://github.com/jcardama/LeopardWM
+License: GPL-3.0
+LicenseUrl: https://github.com/jcardama/LeopardWM/blob/HEAD/LICENSE
+ShortDescription: Scroll-first tiling window manager for Windows 10 and 11.
+Description: LeopardWM is an open-source tiling window manager for Windows 10 and 11 that takes a scroll-first approach inspired by niri and PaperWM. Windows sit on a horizontal strip and the monitor acts as a viewport that scrolls over them, so navigation stays spatially consistent as windows are added — instead of constantly rebuilding split trees. Written in Rust on top of the Win32 API.
+Moniker: leopardwm
+Tags:
+- niri
+- paperwm
+- rust
+- scrollable
+- tiling
+- window-manager
+- windows
+- workspace
+ReleaseNotes: |-
+  Improvements
+  - Smooth animations for Chromium and Electron apps (Preview). Chrome,
+    Edge, Slack, Discord, Beeper, Spotify, VS Code, Cursor, Firefox / Zen,
+    and Windows Terminal Preview now glide through layout transitions
+    instead of stuttering. Replaces the v0.1.10 landing nudge, which only
+    cleaned up after the animation finished. The 1px wobble during scrolls
+    and the first-frame stall after the landing are both gone.
+    Animations stay smooth across:
+    - Column scrolls with multiple Chrome / Electron columns visible
+    - Off-screen columns scrolling into view
+    - Tab cycling inside a tabbed column
+    - Rapid back-to-back scrolls (one transition can preempt another
+      cleanly mid-fade)
+    - Pause, reload, display change, drag cancel, and window close
+      mid-animation
+    Default is off in this release. Enable in Settings → Behavior →
+    "Smooth Chromium animations", run lwm ghost enable, or add
+    swap_chain_ghost_animation = true under [behavior]. If nothing
+    breaks during the opt-in window, the default flips on in v0.1.17.
+    Known limitations:
+    - The focused window keeps using the original animation path. This
+      avoids a Windows quirk where the focus-restore call can land on a
+      temporarily-hidden window. Every other window in the same transition
+      still gets the smooth path.
+    - Cross-monitor moves are not animated through the new path. They use
+      the v0.1.15 path, which already looked fine for that case.
+ReleaseNotesUrl: https://github.com/jcardama/LeopardWM/releases/tag/v0.1.16
+ManifestType: defaultLocale
+ManifestVersion: 1.12.0
