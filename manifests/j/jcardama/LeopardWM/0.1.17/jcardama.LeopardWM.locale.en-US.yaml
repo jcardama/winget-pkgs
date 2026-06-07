@@ -1,0 +1,43 @@
+# Created with WinGet Releaser using komac v2.16.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
+
+PackageIdentifier: jcardama.LeopardWM
+PackageVersion: 0.1.17
+PackageLocale: en-US
+Publisher: jcardama
+PublisherUrl: https://github.com/jcardama
+PublisherSupportUrl: https://github.com/jcardama/LeopardWM/issues
+Author: jcardama
+PackageName: LeopardWM
+PackageUrl: https://github.com/jcardama/LeopardWM
+License: GPL-3.0
+LicenseUrl: https://github.com/jcardama/LeopardWM/blob/HEAD/LICENSE
+ShortDescription: Scroll-first tiling window manager for Windows 10 and 11.
+Description: LeopardWM is an open-source tiling window manager for Windows 10 and 11 that takes a scroll-first approach inspired by niri and PaperWM. Windows sit on a horizontal strip and the monitor acts as a viewport that scrolls over them, so navigation stays spatially consistent as windows are added — instead of constantly rebuilding split trees. Written in Rust on top of the Win32 API.
+Moniker: leopardwm
+Tags:
+- niri
+- paperwm
+- rust
+- scrollable
+- tiling
+- window-manager
+- windows
+- workspace
+ReleaseNotes: |-
+  Fixes
+  - External bars now see all focus changes, not just clicks and Alt+Tab.
+    Focus changes triggered by lwm focus left/right, workspace switches, and
+    similar keyboard commands were silently swallowed by the IPC event stream,
+    so any custom bar showing the current window title would go stale until you
+    clicked something. They fire correctly now.
+  Docs
+  - IPC events reference (agent_docs/ipc-events.md) updated for v0.1.17:
+    documents the previously undocumented per-column mode field on
+    LayoutChanged (vertical vs tabbed), clarifies that lwm subscribe
+    consumes the Subscribed ack frame internally, adds a Yasb custom-widget
+    config snippet that needs no plugin code, and adds a checklist for daemon
+    developers wiring new state changes into the event stream.
+ReleaseNotesUrl: https://github.com/jcardama/LeopardWM/releases/tag/v0.1.17
+ManifestType: defaultLocale
+ManifestVersion: 1.12.0
