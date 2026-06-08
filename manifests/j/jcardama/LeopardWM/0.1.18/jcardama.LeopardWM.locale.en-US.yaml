@@ -1,0 +1,59 @@
+# Created with WinGet Releaser using komac v2.16.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
+
+PackageIdentifier: jcardama.LeopardWM
+PackageVersion: 0.1.18
+PackageLocale: en-US
+Publisher: jcardama
+PublisherUrl: https://github.com/jcardama
+PublisherSupportUrl: https://github.com/jcardama/LeopardWM/issues
+Author: jcardama
+PackageName: LeopardWM
+PackageUrl: https://github.com/jcardama/LeopardWM
+License: GPL-3.0
+LicenseUrl: https://github.com/jcardama/LeopardWM/blob/HEAD/LICENSE
+ShortDescription: Scroll-first tiling window manager for Windows 10 and 11.
+Description: LeopardWM is an open-source tiling window manager for Windows 10 and 11 that takes a scroll-first approach inspired by niri and PaperWM. Windows sit on a horizontal strip and the monitor acts as a viewport that scrolls over them, so navigation stays spatially consistent as windows are added — instead of constantly rebuilding split trees. Written in Rust on top of the Win32 API.
+Moniker: leopardwm
+Tags:
+- niri
+- paperwm
+- rust
+- scrollable
+- tiling
+- window-manager
+- windows
+- workspace
+ReleaseNotes: |-
+  Improvements
+  - Smooth Chromium and Electron animations are now on by default. The
+    experimental swap-chain animation that shipped opt-in in v0.1.16 has
+    soaked with no critical issues, so it is enabled out of the box. Add
+    swap_chain_ghost_animation = false under [behavior] to fall back to
+    the old per-frame path.
+  - lwm doctor now reports the animation thumbnail balance, a quick
+    health signal that should read 0 at rest. Useful for confirming the
+    animation system isn't leaking compositor handles.
+  - Animation system self-recovers from an interrupted handoff. If an
+    internal animation step is ever cut short, the affected windows are no
+    longer skipped by the smooth-animation path on later moves; the guard
+    clears itself within a couple of seconds.
+  - Animation timing is now configurable. A new [animation] section
+    sets the duration of layout transitions, workspace switches, and column
+    scrolls, plus the easing curve (linear / ease in / ease out / ease
+    in-out). Tune them in Settings → Behavior → Animation or in config.
+    Set any duration to 0 to snap instantly.
+  - Workspaces can have names. Label workspaces 1-9 (e.g. "web",
+    "code") in Settings → Layout or via [workspaces].names in config. The
+    name shows in lwm query workspace and is pushed to status bars over
+    IPC, so a bar can display a label instead of a number.
+  Fixes
+  - A keypress can no longer trigger the wrong action right after saving
+    settings. Hotkey IDs were assigned in an unstable order, so reloading
+    the config (e.g. on a settings save) could remap an ID to a different
+    command and let an in-flight keypress fire the wrong one, in the worst
+    case an accidental emergency-restore. IDs are now derived from the key
+    combo itself, so a given key always maps to its own current action.
+ReleaseNotesUrl: https://github.com/jcardama/LeopardWM/releases/tag/v0.1.18
+ManifestType: defaultLocale
+ManifestVersion: 1.12.0
