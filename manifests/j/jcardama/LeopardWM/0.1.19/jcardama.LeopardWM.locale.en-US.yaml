@@ -1,0 +1,77 @@
+# Created with WinGet Releaser using komac v2.16.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
+
+PackageIdentifier: jcardama.LeopardWM
+PackageVersion: 0.1.19
+PackageLocale: en-US
+Publisher: jcardama
+PublisherUrl: https://github.com/jcardama
+PublisherSupportUrl: https://github.com/jcardama/LeopardWM/issues
+Author: jcardama
+PackageName: LeopardWM
+PackageUrl: https://github.com/jcardama/LeopardWM
+License: GPL-3.0
+LicenseUrl: https://github.com/jcardama/LeopardWM/blob/HEAD/LICENSE
+ShortDescription: Scroll-first tiling window manager for Windows 10 and 11.
+Description: LeopardWM is an open-source tiling window manager for Windows 10 and 11 that takes a scroll-first approach inspired by niri and PaperWM. Windows sit on a horizontal strip and the monitor acts as a viewport that scrolls over them, so navigation stays spatially consistent as windows are added — instead of constantly rebuilding split trees. Written in Rust on top of the Win32 API.
+Moniker: leopardwm
+Tags:
+- niri
+- paperwm
+- rust
+- scrollable
+- tiling
+- window-manager
+- windows
+- workspace
+ReleaseNotes: |-
+  Improvements
+  - Scratchpad. Stash a window into a hidden holding area and summon it
+    back as a floating, centered overlay with a hotkey, handy for a quick
+    terminal or notes window. Ctrl+Alt+Shift+S designates the focused
+    window as the scratchpad and hides it; Ctrl+Alt+S toggles it in and
+    out. Also available as lwm scratchpad-stash / lwm scratchpad-toggle.
+    The designation lasts for the session (it resets if you restart the
+    daemon).
+  - Sticky windows. Pin a window so it stays visible on every workspace
+    and follows you when you switch. Ctrl+Alt+Y toggles it (or lwm toggle-sticky). A pinned window floats and re-homes to whichever
+    workspace you move to, sitting still while the rest of the layout
+    scrolls. Toggle it off to unpin; it stays floating. Session-scoped.
+  - Consume window into column. Pull the neighbouring column's window
+    into the focused column as a stack. Ctrl+Alt+, consumes from the left,
+    Ctrl+Alt+. from the right (or lwm consume left / lwm consume right). The inverse of expel; combine with tabbed columns to group
+    windows.
+  - Friendlier hotkeys in config and settings. Key chords now use
+    symbols (Ctrl+Alt+[ rather than Ctrl+Alt+Bracket_Left) in the
+    generated config and the settings window, and you can write either form.
+    The settings hotkey list shows every action with a readable name in a
+    sensible order. lwm config init now produces a complete, correct
+    hotkey config.
+  - On-overflow centering mode. centering_mode = "on_overflow" centers
+    the focused column only when it is wider than the viewport; columns that
+    fit scroll just into view. Selectable in Settings and the tray menu
+    alongside the existing center and just_in_view modes.
+  - New-window placement mode. Choose where newly opened windows go:
+    their own new column (default) or stacked into the focused column,
+    directly below the focused window. Set new_window_placement = "in_column" in config, pick it in Settings or the tray menu, or flip it
+    on the fly with lwm toggle-new-window-placement (bindable as
+    toggle_new_window_placement).
+  - Tray double-click opens Settings. Double-click the tray icon to open
+    the settings window; single and right click keep showing the menu.
+  - Per-app open rules. Window rules can now control how an app opens:
+    open_on_workspace = 5 opens it on that workspace in the background,
+    column_width = 0.5 sets the initial column width as a viewport
+    fraction, and open_maximized = true opens the column maximized. The
+    settings rules table gained workspace and maximize columns, and saving
+    from Settings no longer drops rule fields the table does not show.
+  Fixes
+  - Pinned windows stay visible and focused over fullscreen. A sticky
+    window now remains at its position above a fullscreen window instead of
+    being hidden, and keeps focus when you switch to that workspace while
+    focused on it.
+  - Hidden windows no longer jump to the top-left corner. Entering
+    fullscreen parked every other window at the screen origin; they now keep
+    their real positions while hidden and reappear exactly where they were.
+ReleaseNotesUrl: https://github.com/jcardama/LeopardWM/releases/tag/v0.1.19
+ManifestType: defaultLocale
+ManifestVersion: 1.12.0

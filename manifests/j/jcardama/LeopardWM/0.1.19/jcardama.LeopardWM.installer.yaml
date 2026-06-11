@@ -1,0 +1,26 @@
+# Created with WinGet Releaser using komac v2.16.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.12.0.schema.json
+
+PackageIdentifier: jcardama.LeopardWM
+PackageVersion: 0.1.19
+InstallerLocale: en-US
+InstallerType: wix
+Scope: machine
+UpgradeBehavior: install
+Commands:
+- leopardwm
+- leopardwm-cli
+- lwm
+ProductCode: '{9A23E721-D549-48C1-AADC-719A29F35374}'
+ReleaseDate: 2026-06-11
+AppsAndFeaturesEntries:
+- ProductCode: '{9A23E721-D549-48C1-AADC-719A29F35374}'
+  UpgradeCode: '{EE10F2D5-DA80-43EA-B4D4-A0D37C69DE83}'
+InstallationMetadata:
+  DefaultInstallLocation: '%ProgramFiles%\LeopardWM\bin'
+Installers:
+- Architecture: x64
+  InstallerUrl: https://github.com/jcardama/LeopardWM/releases/download/v0.1.19/LeopardWM-0.1.19-x86_64.msi
+  InstallerSha256: 62D36A30E46CC0C7BD0614429C3BEFF6AC8424B66E25630EE02E6D6BE136FB5E
+ManifestType: installer
+ManifestVersion: 1.12.0
