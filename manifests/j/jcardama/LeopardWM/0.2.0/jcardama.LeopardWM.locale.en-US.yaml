@@ -1,0 +1,76 @@
+# Created with WinGet Releaser using komac v2.16.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.12.0.schema.json
+
+PackageIdentifier: jcardama.LeopardWM
+PackageVersion: 0.2.0
+PackageLocale: en-US
+Publisher: jcardama
+PublisherUrl: https://github.com/jcardama
+PublisherSupportUrl: https://github.com/jcardama/LeopardWM/issues
+Author: jcardama
+PackageName: LeopardWM
+PackageUrl: https://github.com/jcardama/LeopardWM
+License: GPL-3.0
+LicenseUrl: https://github.com/jcardama/LeopardWM/blob/HEAD/LICENSE
+ShortDescription: Scroll-first tiling window manager for Windows 10 and 11.
+Description: LeopardWM is an open-source tiling window manager for Windows 10 and 11 that takes a scroll-first approach inspired by niri and PaperWM. Windows sit on a horizontal strip and the monitor acts as a viewport that scrolls over them, so navigation stays spatially consistent as windows are added — instead of constantly rebuilding split trees. Written in Rust on top of the Win32 API.
+Moniker: leopardwm
+Tags:
+- niri
+- paperwm
+- rust
+- scrollable
+- tiling
+- window-manager
+- windows
+- workspace
+ReleaseNotes: |-
+  Improvements
+  - Overview mode. Ctrl+Alt+Space (or lwm toggle-overview) opens a
+    map of the focused monitor's non-empty workspaces over a blurred
+    backdrop: one row per workspace, each window a rounded card (icon +
+    title) at its true position in the strip, with a ring marking the
+    active workspace's visible region. Click a card to jump to that window,
+    click a row to switch workspace, middle-click a card to close it,
+    arrows/Enter and digits 1-9 work from the keyboard, Esc dismisses.
+    Cards show live window previews (windows on hidden workspaces show
+    their last frame); set render = "placeholder" under [overview] or
+    pick it in Settings to keep the icon placeholders. A third option,
+    render = "snapshot", captures each window right before it leaves the
+    screen and shows that frame instead (icon until one exists). Opening
+    and closing the overview zooms: cards fly between their real window
+    positions and their spots on the map while the backdrop fades. Speed
+    and easing come from a dedicated overview_duration_ms under
+    [animation] and your configured easing curve (instant under reduced
+    motion), tunable in Settings.
+  Fixes
+  - Tiled windows follow taskbar work-area changes. Toggling the
+    taskbar between auto-hide and always-visible now re-fits tiled windows
+    to the new work area instead of leaving them behind a now-permanent
+    taskbar. The work area was previously only refreshed on a display
+    change, not on this setting change.
+  - Sessions restore fully across a daemon restart. Each window returns
+    to the exact monitor, workspace, column grouping, column width, height,
+    and scroll position it had last session, rebuilt from the saved
+    snapshot rather than re-derived from current window positions (which
+    scattered windows whose position was stale or off-screen, and reset all
+    sizes to defaults). Windows that closed while the daemon was down are
+    dropped; windows opened since are added. Workspace state is now saved
+    continuously (debounced, written atomically) rather than only on
+    graceful shutdown, so the layout survives a crash too.
+  - Off-screen columns no longer bleed onto other monitors. On a
+    multi-monitor setup, a column scrolled fully off one monitor is parked off
+    every display instead of reappearing on the neighbor.
+  - New windows open on the active monitor. A new window now opens on the
+    monitor that currently has focus, instead of wherever it first appeared.
+  - Resizing a column keeps it in view. Changing the focused column's width
+    (cycle, set-width, equalize, or drag-resize) now scrolls the viewport to keep
+    the column on screen, instead of letting a column near the edge grow
+    off-screen.
+  - Scratchpad stashes and restores the right window. Stashing reliably
+    targets the focused window instead of occasionally grabbing a neighbor, and
+    releasing returns the window to its original column with focus intact rather
+    than dropping it into a new column or focusing a sibling.
+ReleaseNotesUrl: https://github.com/jcardama/LeopardWM/releases/tag/v0.2.0
+ManifestType: defaultLocale
+ManifestVersion: 1.12.0
